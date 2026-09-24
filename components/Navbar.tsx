@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Zap } from "lucide-react";
+import SkillSwapMark from "@/components/SkillSwapMark";
 
 const links = [
   { href: "/", label: "Browse" },
@@ -16,8 +16,8 @@ export default function Navbar() {
     <nav className="sticky top-0 z-30 border-b border-amber-100 bg-[#fffaf0]/90 backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3">
         <Link href="/" className="flex items-center gap-2 text-xl font-extrabold tracking-tight text-gray-900">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-violet-600 text-neutral-900">
-            <Zap size={18} fill="currentColor" />
+          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-400">
+            <SkillSwapMark size={18} />
           </span>
           SkillSwap
         </Link>
@@ -48,4 +48,3 @@ export default function Navbar() {
     </nav>
   );
 }
-

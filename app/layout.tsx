@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Inter } from "next/font/google";
-import { Zap } from "lucide-react";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import SkillSwapMark from "@/components/SkillSwapMark";
 
 const font = Inter({ subsets: ["latin"] });
 
@@ -21,8 +21,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <footer className="mt-10 border-t border-gray-200 bg-white/60">
           <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-8 text-sm text-gray-500">
             <div className="flex items-center gap-2 font-bold text-gray-900">
-              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-violet-600 text-neutral-900">
-                <Zap size={14} fill="currentColor" />
+              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-amber-400">
+                <SkillSwapMark size={14} />
               </span>
               SkillSwap
             </div>
