@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Zap, Menu, X, Sparkles, UserCheck, ShieldCheck, ChevronDown } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
@@ -52,9 +53,16 @@ export default function Navbar() {
             className="group flex items-center gap-2.5 text-xl font-extrabold tracking-tight text-gray-900"
             style={{ fontFamily: "var(--font-outfit)" }}
           >
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-violet-600 via-indigo-600 to-violet-700 text-white shadow-lg shadow-violet-200 transition-all duration-300 group-hover:scale-105 group-hover:shadow-violet-300">
-              <Zap size={20} fill="currentColor" />
-            </span>
+            <div className="relative flex h-10 w-10 shrink-0 items-center justify-center transition-transform duration-300 group-hover:scale-110">
+              <Image
+                src="/skillswap-logo.png"
+                alt="SkillSwap Logo"
+                width={40}
+                height={40}
+                priority
+                className="h-10 w-10 object-contain drop-shadow-md drop-shadow-violet-500/25"
+              />
+            </div>
             <span>Skill<span className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">Swap</span></span>
           </Link>
           

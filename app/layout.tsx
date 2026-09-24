@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Inter, Outfit } from "next/font/google";
 import { Zap, Heart, ShieldCheck, Sparkles } from "lucide-react";
 import "./globals.css";
@@ -12,6 +13,14 @@ const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit", weight: [
 export const metadata: Metadata = {
   title: "SkillSwap — The Creator Marketplace for Young Talent",
   description: "Monetize skills with transparent queues, zero platform commission, and fair algorithmic discovery. Track 2 Hackathon Finalist.",
+  icons: {
+    icon: [
+      { url: "/skillswap-logo.png", type: "image/png" },
+      { url: "/favicon.ico" }
+    ],
+    shortcut: "/skillswap-logo.png",
+    apple: "/skillswap-logo.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -33,9 +42,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 pb-8 border-b border-gray-100">
               <div className="space-y-2">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-violet-600 via-indigo-600 to-violet-700 text-white shadow-md shadow-violet-200">
-                    <Zap size={18} fill="currentColor" />
-                  </span>
+                  <div className="relative flex h-10 w-10 shrink-0 items-center justify-center">
+                    <Image
+                      src="/skillswap-logo.png"
+                      alt="SkillSwap Logo"
+                      width={40}
+                      height={40}
+                      className="h-10 w-10 object-contain drop-shadow-md drop-shadow-violet-500/25"
+                    />
+                  </div>
                   <div>
                     <p className="text-xl font-extrabold text-gray-900" style={{ fontFamily: "var(--font-outfit)" }}>
                       Skill<span className="text-violet-600">Swap</span>
