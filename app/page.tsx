@@ -8,6 +8,7 @@ import { CATEGORIES } from "@/lib/categories";
 import { categoryStyle } from "@/lib/categoryStyles";
 import { recommendedScore } from "@/lib/ranking";
 import GigCard from "@/components/GigCard";
+import SmoothScrollSidebar from "@/components/SmoothScrollSidebar";
 
 export const dynamic = "force-dynamic";
 
@@ -397,13 +398,14 @@ export default async function Home({ searchParams }: { searchParams: SearchParam
           </div>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-[280px_1fr] items-start">
-          {/* Filter Sidebar */}
-          <form
-            method="GET"
-            action="/#browse"
-            className="gradient-border sticky top-24 self-start space-y-5 rounded-3xl border border-gray-100/90 bg-white p-6 shadow-md transition-shadow"
-          >
+        <div className="grid gap-8 lg:grid-cols-[280px_1fr] relative">
+          {/* Filter Sidebar - Glides down smoothly on scroll */}
+          <SmoothScrollSidebar className="h-fit">
+            <form
+              method="GET"
+              action="/#browse"
+              className="space-y-5 rounded-3xl border border-gray-100/90 bg-white p-6 shadow-md transition-shadow"
+            >
             <div className="flex items-center justify-between pb-2 border-b border-gray-100">
               <span className="flex items-center gap-2 text-sm font-bold text-gray-900">
                 <Filter size={15} className="text-violet-600" /> Filter & Search
@@ -518,6 +520,7 @@ export default async function Home({ searchParams }: { searchParams: SearchParam
               Clear all filters
             </Link>
           </form>
+          </SmoothScrollSidebar>
 
           {/* Results Grid */}
           <div>
