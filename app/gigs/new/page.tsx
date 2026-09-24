@@ -1,35 +1,40 @@
-import { Lightbulb, BadgeDollarSign, Type } from "lucide-react";
+import Link from "next/link";
+import { ArrowLeft, Sparkles, ShieldCheck } from "lucide-react";
 import PostGigForm from "@/components/PostGigForm";
 
 export default function NewGigPage() {
   return (
-    <div className="fade-up mx-auto grid max-w-5xl gap-8 lg:grid-cols-[1.4fr_1fr]">
-      <div className="rounded-3xl border border-gray-100 bg-white p-8 shadow-sm">
-        <h1 className="text-3xl font-extrabold tracking-tight">Post a gig</h1>
-        <p className="mt-2 text-gray-500">List a service so clients can book you.</p>
-        <PostGigForm />
+    <div className="fade-up mx-auto max-w-5xl space-y-6">
+      {/* Navigation & Header */}
+      <div>
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-500 transition hover:text-violet-600"
+        >
+          <ArrowLeft size={14} /> Back to Browse
+        </Link>
+
+        <div className="mt-3 flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-extrabold tracking-tight text-gray-900" style={{ fontFamily: "var(--font-outfit)" }}>
+              Create a Creator Gig
+            </h1>
+            <p className="mt-1 text-sm text-gray-500">
+              List your creative service. Zero fees, instant public listing, and algorithmic boost for new creators.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2 rounded-2xl bg-emerald-50 px-3.5 py-1.5 border border-emerald-200/60 text-xs font-bold text-emerald-700">
+            <ShieldCheck size={16} />
+            <span>0% Commission · Instant Setup</span>
+          </div>
+        </div>
       </div>
 
-      <aside className="h-fit space-y-4 rounded-3xl bg-gradient-to-br from-violet-600 to-indigo-600 p-8 text-white shadow-xl">
-        <h2 className="flex items-center gap-2 text-lg font-bold"><Lightbulb size={20} /> Tips for a great gig</h2>
-        {[
-          { icon: Type, t: "Be specific", d: "\"Instagram Reels editing\" beats \"Video help\"." },
-          { icon: BadgeDollarSign, t: "Price fairly", d: "Check similar gigs on Browse before setting your rate." },
-          { icon: Lightbulb, t: "Say what's included", d: "Number of revisions, delivery time, file formats." },
-        ].map((x) => {
-          const Icon = x.icon;
-          return (
-            <div key={x.t} className="flex gap-3 rounded-2xl bg-white/10 p-4">
-              <Icon size={20} className="mt-0.5 shrink-0" />
-              <div>
-                <p className="font-semibold">{x.t}</p>
-                <p className="text-sm text-violet-100">{x.d}</p>
-              </div>
-            </div>
-          );
-        })}
-        <p className="pt-2 text-sm text-violet-100">New creators get a boost on the marketplace, so your first gig gets seen.</p>
-      </aside>
+      {/* Main Form + Live Preview Card */}
+      <div className="gradient-border overflow-hidden rounded-3xl border border-gray-100 bg-white p-6 sm:p-8 shadow-sm">
+        <PostGigForm />
+      </div>
     </div>
   );
 }
