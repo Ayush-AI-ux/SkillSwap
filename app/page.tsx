@@ -5,6 +5,7 @@ import { CATEGORIES } from "@/lib/categories";
 import { categoryStyle } from "@/lib/categoryStyles";
 import { recommendedScore } from "@/lib/ranking";
 import GigCard from "@/components/GigCard";
+import RobotMascot from "@/components/RobotMascot";
 
 export const dynamic = "force-dynamic";
 
@@ -54,7 +55,9 @@ export default async function Home({ searchParams }: { searchParams: SearchParam
   });
 
   return (
-    <div className="space-y-14">
+      <div className="space-y-14">
+      <RobotMascot />
+      
       {/* Hero */}
       <section className="relative grid items-center gap-10 md:grid-cols-2">
         <div className="fade-up">
@@ -90,22 +93,30 @@ export default async function Home({ searchParams }: { searchParams: SearchParam
         </div>
 
         <div className="relative hidden h-[26rem] md:block">
-          <div className="absolute inset-4 rounded-[2.5rem] bg-gradient-to-br from-violet-200 via-indigo-100 to-pink-100" />
-          <div className="absolute -right-2 top-4 h-40 w-40 rounded-full bg-violet-300/40 blur-3xl" />
-
-          <div className="float absolute left-2 top-10 flex items-center gap-3 rounded-2xl bg-white p-3 pr-5 shadow-xl">
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-rose-50 text-rose-500"><Clapperboard size={22} /></span>
-            <div><p className="text-sm font-bold">Video editing</p><p className="text-xs text-gray-500">From $35</p></div>
+          {/* Backdrop */}
+          <div className="absolute inset-0 overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-violet-100 via-indigo-50 to-pink-50">
+            <span className="absolute -left-10 -top-10 h-48 w-48 rounded-full bg-violet-200/60" />
+            <span className="absolute -bottom-16 -right-10 h-56 w-56 rounded-full bg-pink-200/50" />
+            <span className="absolute right-16 top-10 h-16 w-16 rounded-full bg-white/70" />
           </div>
 
-          <div className="float-slow absolute right-0 top-24 flex items-center gap-3 rounded-2xl bg-white p-3 pr-5 shadow-xl">
-            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600"><Bell size={20} /></span>
-            <div><p className="text-sm font-bold">New booking!</p><p className="text-xs text-gray-500">Sam wants Logo design</p></div>
+          {/* Top-left: gig listing */}
+          <div className="float absolute left-6 top-8 flex items-center gap-3 rounded-2xl bg-white p-3 pr-6 shadow-lg">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-rose-50 text-rose-500">
+              <Clapperboard size={22} />
+            </span>
+            <div>
+              <p className="text-sm font-bold">Video editing</p>
+              <p className="text-xs text-gray-500">From $35</p>
+            </div>
           </div>
 
-          <div className="absolute left-1/2 top-1/2 w-72 -translate-x-1/2 -translate-y-[40%] rounded-3xl bg-white p-6 shadow-2xl">
+          {/* Center: main card */}
+          <div className="absolute left-1/2 top-1/2 w-72 -translate-x-1/2 -translate-y-1/2 rounded-3xl bg-white p-6 shadow-2xl">
             <div className="flex items-center gap-3">
-              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-50 text-orange-500"><Palette size={24} /></span>
+              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-50 text-orange-500">
+                <Palette size={24} />
+              </span>
               <div>
                 <p className="font-bold">Logo design</p>
                 <p className="text-xs text-gray-500">by Kabir</p>
@@ -113,13 +124,22 @@ export default async function Home({ searchParams }: { searchParams: SearchParam
             </div>
             <div className="mt-5 flex items-center justify-between border-t border-gray-100 pt-4">
               <span className="text-2xl font-extrabold">$80</span>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" /> Accepted
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-700">
+                <span className="h-1.5 w-1.5 rounded-full bg-amber-500" /> Pending
               </span>
             </div>
           </div>
 
-          <div className="float absolute bottom-6 left-8 flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-sky-500 shadow-xl"><Music2 size={26} /></div>
+          {/* Bottom-right: accepted notification */}
+          <div className="float-slow absolute bottom-8 right-6 flex items-center gap-3 rounded-2xl bg-white p-3 pr-6 shadow-lg">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+              <CheckCircle2 size={22} />
+            </span>
+            <div>
+              <p className="text-sm font-bold">Booking accepted</p>
+              <p className="text-xs text-gray-500">Kabir said yes</p>
+            </div>
+          </div>
         </div>
       </section>
 

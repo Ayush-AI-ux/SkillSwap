@@ -18,10 +18,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${font.className} min-h-screen antialiased`}>
         <Navbar />
         <main className="mx-auto max-w-6xl px-4 py-10">{children}</main>
-        <footer className="mt-10 border-t border-gray-100 bg-white">
+        <footer className="mt-10 border-t border-gray-200 bg-white/60">
           <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-8 text-sm text-gray-500">
             <div className="flex items-center gap-2 font-bold text-gray-900">
-              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-violet-600 text-white">
+              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-violet-600 text-neutral-900">
                 <Zap size={14} fill="currentColor" />
               </span>
               SkillSwap
