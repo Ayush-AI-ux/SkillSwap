@@ -4,7 +4,7 @@
 
 - **Track:** Track 2, Real-World AI Products
 - **Brief:** SkillSwap (creator gig marketplace)
-- **Live app:** (https://skill-swap-six-umber.vercel.app/)
+- **Live app:** https://skill-swap-six-umber.vercel.app/
 
 ## What it is
 
