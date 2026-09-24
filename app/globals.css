@@ -6,7 +6,7 @@
   ::before,
   ::backdrop,
   ::file-selector-button {
-    border-color: #e5e7eb;
+    border-color: #888d98;
   }
 }
 
@@ -15,7 +15,7 @@
 }
 
 body {
-  background: #f8f9fe;
+  background: #acadaf;
   color: #111827;
 }
 
