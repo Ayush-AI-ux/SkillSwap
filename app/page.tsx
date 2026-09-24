@@ -397,12 +397,12 @@ export default async function Home({ searchParams }: { searchParams: SearchParam
           </div>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
+        <div className="grid gap-8 lg:grid-cols-[280px_1fr] items-start">
           {/* Filter Sidebar */}
           <form
             method="GET"
             action="/#browse"
-            className="gradient-border h-fit space-y-5 rounded-3xl border border-gray-100/90 bg-white p-6 shadow-sm"
+            className="gradient-border sticky top-24 self-start space-y-5 rounded-3xl border border-gray-100/90 bg-white p-6 shadow-md transition-shadow"
           >
             <div className="flex items-center justify-between pb-2 border-b border-gray-100">
               <span className="flex items-center gap-2 text-sm font-bold text-gray-900">
