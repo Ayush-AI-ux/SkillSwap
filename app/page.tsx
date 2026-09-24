@@ -402,7 +402,7 @@ export default async function Home({ searchParams }: { searchParams: SearchParam
           <form
             method="GET"
             action="/#browse"
-            className="gradient-border h-fit space-y-5 rounded-3xl border border-gray-100/90 bg-white p-6 shadow-sm lg:sticky lg:top-24"
+            className="gradient-border h-fit space-y-5 rounded-3xl border border-gray-100/90 bg-white p-6 shadow-sm"
           >
             <div className="flex items-center justify-between pb-2 border-b border-gray-100">
               <span className="flex items-center gap-2 text-sm font-bold text-gray-900">

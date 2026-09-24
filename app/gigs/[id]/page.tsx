@@ -160,7 +160,7 @@ export default async function GigPage({ params, searchParams }: { params: Params
 
         {/* Right Column: Sticky Booking Card & Queue Info */}
         <div className="lg:col-span-5">
-          <div className="gradient-border overflow-hidden rounded-3xl border border-gray-100 bg-white p-6 sm:p-7 shadow-lg lg:sticky lg:top-24 space-y-5">
+          <div className="gradient-border overflow-hidden rounded-3xl border border-gray-100 bg-white p-6 sm:p-7 shadow-lg space-y-5">
             <div>
               <h2 className="text-xl font-bold text-gray-900" style={{ fontFamily: "var(--font-outfit)" }}>
                 Book This Gig
