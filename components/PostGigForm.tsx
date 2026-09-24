@@ -6,7 +6,7 @@ import { CATEGORIES } from "@/lib/categories";
 import type { FormState } from "@/lib/types";
 import SubmitButton from "./SubmitButton";
 
-const input = "mt-1 w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm outline-none transition focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100";
+const input = "mt-1 w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm outline-none transition focus:border-violet-500 focus:ring-2 focus:ring-violet-100";
 const errorText = "mt-1 text-sm text-red-600";
 
 export default function PostGigForm() {

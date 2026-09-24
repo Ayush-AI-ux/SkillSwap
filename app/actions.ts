@@ -4,10 +4,10 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { CATEGORIES, DECLINE_REASONS } from "@/lib/categories";
+import { isValidEmail, suggestEmail } from "@/lib/email";
 import type { FormState } from "@/lib/types";
 
 const text = (fd: FormData, key: string) => String(fd.get(key) ?? "").trim();
-const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // ---------- Feature 1: Post a gig ----------
 export async function createGig(_prev: FormState, formData: FormData): Promise<FormState> {
@@ -64,8 +64,22 @@ export async function createBooking(_prev: FormState, formData: FormData): Promi
   const errors: Record<string, string> = {};
 
   if (!values.clientName) errors.clientName = "Your name is required.";
-  if (!values.clientEmail) errors.clientEmail = "Your email is required.";
-  else if (!EMAIL.test(values.clientEmail)) errors.clientEmail = "Please enter a valid email address.";
+
+  if (!values.clientEmail) {
+    errors.clientEmail = "Your email is required.";
+  } else if (!isValidEmail(values.clientEmail)) {
+    errors.clientEmail = "Please enter a valid email address, like name@example.com.";
+  } else {
+    // Typo catch: suggest a fix, but let the person keep what they typed
+    const suggestion = suggestEmail(values.clientEmail);
+    const confirmed = text(formData, "confirmEmail").toLowerCase() === values.clientEmail;
+    if (suggestion && !confirmed) {
+      errors.clientEmail = `Did you mean ${suggestion}? Click "Use ${suggestion}" or "Keep as typed".`;
+      // Only the name/message errors are checked below, so return the suggestion right away
+      return { errors, values: { ...values, suggestion } };
+    }
+  }
+
   if (values.message.length > 500) errors.message = "Message must be 500 characters or fewer.";
 
   if (Object.keys(errors).length > 0) return { errors, values };

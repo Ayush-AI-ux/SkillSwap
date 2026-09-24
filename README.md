@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SkillSwap
 
-## Getting Started
+**Hackathon ID: AZIS-4MWXBG**
 
-First, run the development server:
+- **Track:** Track 2, Real-World AI Products
+- **Brief:** SkillSwap (creator gig marketplace)
+- **Live app:** PASTE-YOUR-VERCEL-URL-HERE
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## What it is
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+A marketplace where young creators post gigs and clients book them. There is no login: anyone can use every feature.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## The five required features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Post a gig:** `/gigs/new` (title, category, rate, description, creator name)
+2. **Browse & search:** `/` (search, category filter, price range, sort)
+3. **Book a gig:** `/gigs/[id]` (booking form, then a confirmation page)
+4. **Creator dashboard:** `/dashboard` (pick a creator, accept or decline bookings)
+5. **My bookings:** `/my-bookings` (enter your email to see Pending, Accepted, or Declined)
 
-## Learn More
+Decision Point behavior is explained in [DECISIONS.md](./DECISIONS.md).
 
-To learn more about Next.js, take a look at the following resources:
+## Tech stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Next.js (App Router) with TypeScript, React, Tailwind CSS, Prisma ORM, PostgreSQL on Neon, deployed on Vercel.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Test credentials
 
-## Deploy on Vercel
+**None. No authentication is required.** Open the live URL and use any feature.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Seeded demo data: creators Aarav, Meera, Kabir, Riya and Ishaan. Try `sam@example.com` in My bookings to see a Pending, Accepted and Declined example.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Run locally
+
+1. `npm install`
+2. Create a `.env` file with `DATABASE_URL="your-postgres-connection-string"`
+3. `npx prisma db push`
+4. `npx tsx prisma/seed.ts`
+5. `npm run dev`, then open http://localhost:3000
+
+## Standard API
+
+Not implemented. Features are meant to be graded through the UI. Key elements have `data-testid` attributes.

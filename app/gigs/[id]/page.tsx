@@ -1,81 +1,66 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Users } from "lucide-react";
+import { CheckCircle2, Clock, Mail, User, Hash } from "lucide-react";
 import { prisma } from "@/lib/prisma";
-import { iconFor } from "@/lib/categoryStyles";
-import BookingForm from "@/components/BookingForm";
+import StatusBadge from "@/components/StatusBadge";
 
 export const dynamic = "force-dynamic";
 
-type Params = Promise<{ id: string }>;
-type SP = Promise<{ posted?: string }>;
-
-export default async function GigPage({ params, searchParams }: { params: Params; searchParams: SP }) {
+export default async function BookingConfirmation({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const { posted } = await searchParams;
+  const booking = await prisma.booking.findUnique({ where: { id }, include: { gig: true } });
+  if (!booking) notFound();
 
-  const gig = await prisma.gig.findUnique({ where: { id } });
-  if (!gig) notFound();
+  const ahead = await prisma.booking.count({
+    where: { gigId: booking.gigId, status: "Pending", createdAt: { lt: booking.createdAt } },
+  });
 
-  const pending = await prisma.booking.count({ where: { gigId: id, status: "Pending" } });
-  const Icon = iconFor(gig.category);
+  const rows = [
+    { icon: Hash, label: "Reference", value: <strong data-testid="booking-ref">{booking.id.slice(-8).toUpperCase()}</strong> },
+    { icon: User, label: "Name", value: booking.clientName },
+    { icon: Mail, label: "Email", value: booking.clientEmail },
+  ];
 
   return (
-    <div>
-      {posted && (
-        <div className="mb-6 rounded-lg border border-green-200 bg-green-50 p-4 text-sm text-green-800" data-testid="posted-banner">
-          Your gig is live!{" "}
-          <Link className="font-semibold underline" href={`/dashboard?creator=${encodeURIComponent(gig.creatorName)}`}>
-            Go to your creator dashboard
-          </Link>
-        </div>
-      )}
+    <div className="fade-up mx-auto max-w-xl overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-xl" data-testid="confirmation">
+      <div className="bg-gradient-to-br from-emerald-500 to-teal-500 px-8 py-10 text-center text-white">
+        <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white/20">
+          <CheckCircle2 size={36} />
+        </span>
+        <h1 className="mt-4 text-3xl font-extrabold">Booking request sent!</h1>
+        <p className="mt-2 text-emerald-50">
+          {booking.gig.creatorName} will review your request for <strong>{booking.gig.title}</strong>.
+        </p>
+      </div>
 
-      <Link href="/" className="text-sm text-gray-500 hover:text-gray-900">&larr; Back to all gigs</Link>
-
-      <div className="mt-4 grid gap-10 lg:grid-cols-[1.5fr_1fr]">
-        <div>
-          <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-gray-100 text-gray-700">
-              <Icon size={22} />
-            </span>
-            <span className="text-sm font-medium uppercase tracking-wide text-gray-500">{gig.category}</span>
-          </div>
-
-          <h1 className="mt-4 text-3xl font-bold tracking-tight" data-testid="gig-detail-title">{gig.title}</h1>
-
-          <div className="mt-5 flex items-center justify-between border-y border-gray-200 py-4">
-            <div className="flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 font-semibold text-gray-700">
-                {gig.creatorName.charAt(0).toUpperCase()}
-              </span>
-              <div>
-                <p className="font-medium">{gig.creatorName}</p>
-                <p className="text-xs text-gray-500">Creator</p>
+      <div className="p-8">
+        <div className="divide-y divide-gray-100 rounded-2xl border border-gray-100">
+          {rows.map((r) => {
+            const Icon = r.icon;
+            return (
+              <div key={r.label} className="flex items-center justify-between px-4 py-3 text-sm">
+                <span className="flex items-center gap-2 text-gray-500"><Icon size={16} /> {r.label}</span>
+                <span className="text-gray-900">{r.value}</span>
               </div>
-            </div>
-            <p className="text-2xl font-bold">${gig.rate}</p>
+            );
+          })}
+          <div className="flex items-center justify-between px-4 py-3 text-sm">
+            <span className="flex items-center gap-2 text-gray-500"><Clock size={16} /> Status</span>
+            <StatusBadge status={booking.status} />
           </div>
-
-          <h2 className="mt-8 text-sm font-semibold uppercase tracking-wide text-gray-500">About this gig</h2>
-          <p className="mt-2 whitespace-pre-line leading-relaxed text-gray-700">{gig.description}</p>
         </div>
 
-        <div className="h-fit rounded-xl border border-gray-200 bg-white p-6 lg:sticky lg:top-24">
-          <h2 className="text-lg font-semibold">Book this gig</h2>
+        <p className="mt-4 rounded-xl bg-violet-50 p-3 text-center text-sm text-violet-800">
+          Your place in the queue: <strong>#{ahead + 1}</strong>
+        </p>
 
-          <p className="mt-3 flex items-start gap-2 rounded-lg bg-gray-50 p-3 text-sm text-gray-700" data-testid="pending-note">
-            <Users size={16} className="mt-0.5 shrink-0 text-gray-500" />
-            <span>
-              {pending === 0
-                ? "No pending requests. You would be first in line."
-                : `${pending} other pending request${pending === 1 ? "" : "s"} for this gig. You can still book, and you'll see your place in the queue under My bookings.`}
-            </span>
-          </p>
-
-          <div className="mt-5">
-            <BookingForm gigId={gig.id} />
-          </div>
+        <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm font-semibold">
+          <Link className="rounded-xl bg-violet-600 px-5 py-2.5 text-white shadow-md shadow-violet-200 hover:bg-violet-700" href={`/my-bookings?email=${encodeURIComponent(booking.clientEmail)}`}>
+            View my bookings
+          </Link>
+          <Link className="rounded-xl border border-gray-200 bg-white px-5 py-2.5 hover:border-violet-300" href="/">
+            Browse more gigs
+          </Link>
         </div>
       </div>
     </div>

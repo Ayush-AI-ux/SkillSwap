@@ -3,7 +3,7 @@
 import { useFormStatus } from "react-dom";
 
 const styles = {
-  primary: "bg-indigo-600 hover:bg-indigo-700",
+  primary: "bg-violet-600 hover:bg-violet-700",
   success: "bg-green-600 hover:bg-green-700",
   danger: "bg-red-600 hover:bg-red-700",
 };
@@ -22,7 +22,7 @@ export default function SubmitButton({ children, pendingText = "Saving...", vari
       type="submit"
       disabled={pending}
       data-testid={testId}
-      className={`rounded-lg px-5 py-2.5 text-sm font-semibold text-white transition disabled:opacity-60 ${styles[variant]}`}
+      className={`rounded-xl px-5 py-2.5 text-sm font-semibold text-white transition disabled:opacity-60 ${styles[variant]}`}
     >
       {pending ? pendingText : children}
     </button>
