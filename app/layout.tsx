@@ -4,6 +4,7 @@ import { Inter, Outfit } from "next/font/google";
 import { Zap, Heart, ShieldCheck, Sparkles } from "lucide-react";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import FloatingRobot from "@/components/FloatingRobot";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit", weight: ["400", "500", "600", "700", "800"] });
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       >
         <Navbar />
         <main className="mx-auto max-w-6xl px-4 py-8 sm:py-12">{children}</main>
+        <FloatingRobot />
 
         <footer className="relative mt-20 overflow-hidden border-t border-gray-100 bg-white/90 backdrop-blur-xl">
           {/* Radiant top gradient border */}
